@@ -1,3 +1,5 @@
+require 'pry'
+
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +129,62 @@ def game_hash
 end
 
 # Write code here
+
+# take in player's name & returns number of points scored
+def num_points_scored player_name
+  game_hash.each do |location, team_data|
+    # location = 'home' or 'away'
+    # team_data is the hash within the key 'home' and the hash within the key 'away'
+    team_data.each do |attribute, data|
+      # attribute is the key (i.e. :team_name, :colors, :players)
+      # data is the value (i.e. "Brooklyn Nets", ["Black", "White"], [*hash of players])
+      if attribute == :players
+        data.each do |data_item|
+          data_item.each do |category, info|
+          if info == player_name
+            return data_item[:points]
+          end
+          end
+        end
+      end
+    end
+  end
+end
+
+# takes in player's name and returns shoe size
+def shoe_size player_name
+  game_hash.each do |location, team_data|
+    # location = 'home' or 'away'
+    # team_data is the hash within the key 'home' and the hash within the key 'away'
+    team_data.each do |attribute, data|
+      # attribute is the key (i.e. :team_name, :colors, :players)
+      # data is the value (i.e. "Brooklyn Nets", ["Black", "White"], [*hash of players])
+      if attribute == :players
+        data.each do |data_item|
+          data_item.each do |category, info|
+          if info == player_name
+            return data_item[:shoe]
+          end
+          end
+        end
+      end
+    end
+  end
+end
+
+# takes in team name and returns Array of team colors
+def team_colors team_name
+  game_hash.each do |location, team_data|
+    # location = 'home' or 'away'
+    # team_data is the hash within the key 'home' and the hash within the key 'away'
+    team_data.each do |attribute, data|
+      # attribute is the key (i.e. :team_name, :colors, :players)
+      # data is the value (i.e. "Brooklyn Nets", ["Black", "White"], [*hash of players])
+      if data == team_name
+        return team_data[:colors]
+      end
+    end
+  end
+end
+
+team_colors("Brooklyn Nets")
